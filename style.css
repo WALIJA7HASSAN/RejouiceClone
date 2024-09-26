@@ -314,7 +314,7 @@ nav h4{
 }
 .page2hr,.page4hr,.page6hr{
     height: 1px;
-    width: 0;
+    width: 100%;
     margin: 2rem 0;
     background: rgb(0, 0, 0);
 }
@@ -594,7 +594,7 @@ footer{
      min-height: 100vh;
 }
 .footer-top{
-    position: absolute;
+    
     min-height: 100%;
     width: 100%;
     background: #FAF8F3;
@@ -607,7 +607,7 @@ footer{
 }
 
 .footer-bottom{
-    position: absolute;
+    
      min-height: 100vh;
     width: 100%;
     background: #000000;
@@ -783,6 +783,14 @@ height: 4vw;
     justify-content: space-between;
     flex-wrap: wrap;
     flex-direction: row;
+}
+.footer-top{
+    position: absolute;
+}
+
+.footer-bottom{
+    position: absolute;
+
 }
 }
 

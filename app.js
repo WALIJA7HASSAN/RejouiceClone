@@ -6,6 +6,9 @@ const locoScroll=()=>{
   const locoScroll = new LocomotiveScroll({
     el: document.querySelector('#main'),
     smooth: true,
+    smartphone: {
+      smooth: true
+    }
   })
   // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
   locoScroll.on('scroll', ScrollTrigger.update)
@@ -126,10 +129,10 @@ menuItems.forEach((item) => {
     item.addEventListener('mouseover', () => {
         const hoverElement = item.querySelector(".menu-item-active");
         const el = item.querySelector(".menu-item");
-        gsap.to(hoverElement, { yPercent: -100, duration: 0.2, ease: 'sine.in',
+        gsap.to(hoverElement, { yPercent: -100, duration: 0.3, ease: 'sine.in',
           opacity:1,
          })
-        gsap.to(el, { yPercent: -100, duration: 0.2, ease: "sine.out",
+        gsap.to(el, { yPercent: -100, duration: 0.3, ease: "sine.out",
           opacity:0
          });
     });
@@ -140,11 +143,11 @@ menuItems.forEach((item) => {
         const el = item.querySelector(".menu-item");
         gsap.to(hoverElement, {
           yPercent: 100,
-          duration: 0.2,
+          duration: 0.3,
           ease: 'sine.out',
           opacity: 0,
         })
-        gsap.to(el, { yPercent: 0, duration: 0.2, ease: 'sine.in', opacity: 1 })
+        gsap.to(el, { yPercent: 0, duration: 0.3, ease: 'sine.in', opacity: 1 })
     });
 });
 // rooling text anim
@@ -184,8 +187,8 @@ const page2Anim = () => {
       scrub: 2,
     },
   })
-  gsap.to('.page2hr', {
-    width: '100%',
+  gsap.from('.page2hr', {
+    width: '0%',
     scrollTrigger: {
       trigger: '#page2',
       scroller: '#main',
@@ -197,78 +200,80 @@ const page2Anim = () => {
 
 }
 
-page2Anim()
+
+
+
+
 
 
 // page3
-gsap.from('.page3-top h2 span ', {
-  y: 120,
-  stagger: 0.2,
-  duration: 1,
-  scrollTrigger: {
-    trigger: '#page3',
-    scroller: '#main', //omstead of body,main jis pe  locomotive applied
-    start: 'top 47%',
-    end: 'top 46%',
-    scrub: 2,
-  },
-})
-
-// drag to scroll
-const container = document.querySelector('.page3cards')
-let isDown = false
-let startX
-let scrollLeft
-
-// Mouse Down Event
-container.addEventListener('mousedown', (e) => {
-  isDown = true
-  container.classList.add('active')
-  startX = e.pageX - container.offsetLeft
-  scrollLeft = container.scrollLeft
-})
-
-// Mouse Leave Event
-container.addEventListener('mouseleave', () => {
-  isDown = false
-  container.classList.remove('active')
-})
-
-// Mouse Up Event
-container.addEventListener('mouseup', () => {
-  isDown = false
-  container.classList.remove('active')
-})
-
-// Mouse Move Event
-container.addEventListener('mousemove', (e) => {
-  if (!isDown) return // Stop the function if not dragging
-  e.preventDefault()
-  const x = e.pageX - container.offsetLeft
-  const walk = (x - startX) * 2 // Multiply by 2 for faster scrolling
-  container.scrollLeft = scrollLeft - walk
-})
-
-// Touch Drag Event for Mobile
-container.addEventListener('touchstart', (e) => {
-  isDown = true
-  startX = e.touches[0].pageX - container.offsetLeft
-  scrollLeft = container.scrollLeft
-})
-
-container.addEventListener('touchend', () => {
-  isDown = false
-})
-
-container.addEventListener('touchmove', (e) => {
-  if (!isDown) return
-  const x = e.touches[0].pageX - container.offsetLeft
-  const walk = (x - startX) * 2
-  container.scrollLeft = scrollLeft - walk
-})
-
-
-
+ // drag to scroll
+ const container = document.querySelector('.page3cards')
+ let isDown = false
+ let startX
+ let scrollLeft
+ 
+ // Mouse Down Event
+ container.addEventListener('mousedown', (e) => {
+   isDown = true
+   container.classList.add('active')
+   startX = e.pageX - container.offsetLeft
+   scrollLeft = container.scrollLeft
+ })
+ 
+ // Mouse Leave Event
+ container.addEventListener('mouseleave', () => {
+   isDown = false
+   container.classList.remove('active')
+ })
+ 
+ // Mouse Up Event
+ container.addEventListener('mouseup', () => {
+   isDown = false
+   container.classList.remove('active')
+ })
+ 
+ // Mouse Move Event
+ container.addEventListener('mousemove', (e) => {
+   if (!isDown) return // Stop the function if not dragging
+   e.preventDefault()
+   const x = e.pageX - container.offsetLeft
+   const walk = (x - startX) * 2 // Multiply by 2 for faster scrolling
+   container.scrollLeft = scrollLeft - walk
+ })
+ 
+ // Touch Drag Event for Mobile
+ container.addEventListener('touchstart', (e) => {
+   isDown = true
+   startX = e.touches[0].pageX - container.offsetLeft
+   scrollLeft = container.scrollLeft
+ })
+ 
+ container.addEventListener('touchend', () => {
+   isDown = false
+ })
+ 
+ container.addEventListener('touchmove', (e) => {
+   if (!isDown) return
+   const x = e.touches[0].pageX - container.offsetLeft
+   const walk = (x - startX) * 2
+   container.scrollLeft = scrollLeft - walk
+ })
+const page3Anim=()=>{
+  gsap.from('.page3-top h2 span ', {
+    y: 120,
+    stagger: 0.2,
+    duration: 1,
+    scrollTrigger: {
+      trigger: '#page3',
+      scroller: '#main', //omstead of body,main jis pe  locomotive applied
+      start: 'top 47%',
+      end: 'top 46%',
+      scrub: 2,
+    },
+  })
+    
+}
 // page4
 const page4Anim = () => {
   const page4Content = document.querySelector('.page4Content')
@@ -305,8 +310,8 @@ const page4Anim = () => {
       scrub: 2,
     },
   })
-  gsap.to('.page4hr', {
-    width: '100%',
+  gsap.from('.page4hr', {
+    width: '0%',
     scrollTrigger: {
       trigger: '#page4',
       scroller: '#main',
@@ -317,7 +322,7 @@ const page4Anim = () => {
   })
 }
 
-page4Anim()
+
 // page5
 const numberSpan = document.querySelector('.page5-spans span')
 const number=()=>{
@@ -330,7 +335,7 @@ const number=()=>{
     }
   }, 100) // 1000ms = 1 second
 }
-const Page5Anim = () => {
+const page5Anim = () => {
   const Cursor = document.querySelector('.page5-cursor')
   const page5 = document.querySelector('#page5')
   const seatSpan = document.querySelector(' .page5-spans')
@@ -368,7 +373,7 @@ const Page5Anim = () => {
   })
 }
 
-Page5Anim()
+
 
 
 
@@ -409,8 +414,8 @@ const page6Anim = () => {
       scrub: 2,
     },
   })
-  gsap.to('.page6hr', {
-    width: '100%',
+  gsap.from('.page6hr', {
+    width: '0%',
     scrollTrigger: {
       trigger: '#page6',
       scroller: '#main',
@@ -421,7 +426,8 @@ const page6Anim = () => {
   })
 }
 
-page6Anim()
+
+
 
 // page7 swiper
 
@@ -492,29 +498,48 @@ gsap.to('.footer-top', {
   },
 })
 
-gsap.from('.footer-top h2 span ', {
-  y: 120,
-  stagger: 0.2,
-  duration: 1,
-  scrollTrigger: {
-    trigger: '.footer',
-    scroller: '#main', //omstead of body,main jis pe  locomotive applied
-    start: 'top 70%',
-    end: 'top 69%',
-    scrub: 2,
-  },
-})
+const footerAnim=()=>{
 
-gsap.from('.footer-bottom-logo h1 span', {
-  opacity: 0,
-  y: -50,
-  stagger: 0.1,
-  delay: -0.5,
-  scrollTrigger: {
-    trigger: '.footer',
-    scroller: '#main',
-    start: 'top 20%',
-    end: 'top 19%',
-    scrub: 4,
-  },
-})
+  gsap.from('.footer-top h2 span ', {
+    y: 120,
+    stagger: 0.2,
+    duration: 1,
+    scrollTrigger: {
+      trigger: '.footer',
+      scroller: '#main', //omstead of body,main jis pe  locomotive applied
+      start: 'top 70%',
+      end: 'top 69%',
+      scrub: 2,
+    },
+  })
+  
+  gsap.from('.footer-bottom-logo h1 span', {
+    opacity: 0,
+    y: -50,
+    stagger: 0.1,
+    delay: -0.5,
+    scrollTrigger: {
+      trigger: '.footer',
+      scroller: '#main',
+      start: 'top 20%',
+      end: 'top 19%',
+      scrub: 4,
+    },
+  })
+}
+
+ScrollTrigger.matchMedia({
+  
+  // Tablet and larger
+  "(min-width: 768px)": function() {
+    // Call the function for larger screens
+    page2Anim()
+    page3Anim()
+    page4Anim()
+    page5Anim()
+    page6Anim()
+    footerAnim()
+   
+    
+  }
+});
